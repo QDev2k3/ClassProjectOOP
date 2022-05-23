@@ -230,6 +230,33 @@ void Customer::print() {
     }
 }
 
+void Customer::printAll() {
+    if (type.compare("Child") == 0) {
+        cout << "Name: " << children.name << "\n"; 
+        cout << "ID: " << children.id << "\n"; 
+        cout << "Gender: " << children.gender << "\n";
+        cout << "Age: " << children.age << "\n";
+        cout << "Address: " << children.address << "\n";
+        cout << "Place: " << children.place << "\n";
+        cout << "Transport: " << children.transport << "\n";
+        cout << "Ticket type: " << children.ticketTier << "\n";
+        cout << "Duration of stay: " << children.days << " days\n";
+        cout << "Total Fee: " << children.price << " VND\n";
+    }
+    else {
+        cout << "Name: " << adult.name << "\n"; 
+        cout << "ID: " << adult.id << "\n"; 
+        cout << "Gender: " << adult.gender << "\n";
+        cout << "Age: " << adult.age << "\n";
+        cout << "Address: " << adult.address << "\n";
+        cout << "Place: " << adult.place << "\n";
+        cout << "Transport: " << adult.transport << "\n";
+        cout << "Ticket type: " << adult.ticketTier << "\n";
+        cout << "Duration of stay: " << adult.days << " days\n";
+        cout << "Total Fee: " << adult.price << " VND\n";
+    }
+}
+
 void ReadFile(ifstream &fileIn, Customer &C) {
     getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
