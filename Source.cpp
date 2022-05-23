@@ -190,7 +190,7 @@ void Customer::inputCustomer() {
     cin.ignore();
     
     if (age < 18){
-        type = "Children";
+        type = "Child";
         children.name = name;
         children.id = id;
         children.age = age;
@@ -216,23 +216,23 @@ void Customer::inputCustomer() {
 }
 
 void Customer::print() {
-    if (type.compare("Children") == 0) {
+    if (type.compare("Child") == 0) {
         cout << children.name << "\t"; 
         cout << children.id << "\t"; 
-        cout << type << "\t"; 
-        cout << children.price << endl;
+        cout << children.place << "\t";
+        cout << children.price << "\n"; 
     }
     else {
         cout << adult.name << "\t";
         cout << adult.id << "\t";
-        cout << type << "\t";
-        cout << adult.price << endl;
+        cout << adult.place << "\t";
+        cout << adult.price << "\n";
     }
 }
 
 void ReadFile(ifstream &fileIn, Customer &C) {
     getline(fileIn,C.type,',');
-    if (C.type.compare("Children") == 0) {
+    if (C.type.compare("Child") == 0) {
         getline(fileIn,C.children.name,',');
         getline(fileIn,C.children.id,',');
         getline(fileIn,C.children.address,',');
@@ -266,44 +266,73 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     }
 }
 
+void addRecord() {
+    Customer S;
+    cout << "\n=============== Book a Ticket =============== \n";
+    S.inputCustomer();
+    ofstream fileOut;
+    fileOut.open("Tourist.txt", ios_base::app);
+    fileOut << endl;
+    fileOut << S.type << ",";
+    if (S.type.compare("Child") == 0) {
+        fileOut << S.children.name << "," << S.children.id << ",";
+        fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
+        fileOut << S.children.ticketTier << ",";
+        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price << endl;
+    }
+    else {
+        fileOut << S.adult.name << "," << S.adult.id << ",";
+        fileOut << S.adult.address << "," << S.adult.place << "," << S.adult.transport << ",";
+        fileOut << S.adult.ticketTier << ",";
+        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price;
+    }
+    fileOut.close();
+    cout << "\n========= Record created successfully! ========= \n";
+    system("pause");
+}
+
 void ViewRecord() {
-    int choice;
     ifstream fileIn;
     fileIn.open("Tourist.txt");
-
     vector<Customer> List;
     VectorReadFile(fileIn,List);
-    cout << "Name\tID\tTicket Type\tPrice" << endl;
+    cout << "\n================ Tourist Record ================ \n";
+    cout << "Name\t\tID\t\tPlace  \tPrice" << endl;
+    cout << "------------------------------------------------ \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
     fileIn.close();
-    cout << "\n\nWhat would you like to do now?\n";
-    cout<<"\n\t\t\t1.Return to menu";
-    cout<<"\n\t\t\t2.Exit";
+    system("pause");
 }
 
 
 int main() {
     int choice =0;
     do {
+    system("cls");
     cout<<"\n\t\t\t\t=========================";
     cout<<"\n\t\t\t\t    UIT TRAVEL PROGRAM ";
     cout<<"\n\t\t\t\t      * MAIN MENU *";
     cout<<"\n\t\t\t\t=========================";
     cout<<"\n\n\n\t\t\t1.Book A Ticket";
-    cout<<"\n\t\t\t2.Tourist Records";
-    cout<<"\n\t\t\t3.Edit Record";
-    cout<<"\n\t\t\t4.Exit";
+    cout<<"\n\t\t\t2.Tourist records";
+    cout<<"\n\t\t\t3.Search For Record";
+    cout<<"\n\t\t\t4.Edit Record";
+    cout<<"\n\t\t\t5.Exit";
     cout<<"\n\n\t\t\tEnter Your Choice: ";
     cin >> choice; cin.ignore();
     switch(choice) {
+        case 1:
+            addRecord();
+            break;
         case 2:
             ViewRecord();
             break;
+        case 3:
+        default:
+            break;
     }
-    } while (choice != 4);
-
-    system("pause");
+    } while (choice != 5);
     return 0;
 }
