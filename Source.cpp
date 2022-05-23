@@ -293,7 +293,7 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     }
 }
 
-void addRecord() {
+void AddRecord() {
     Customer S;
     cout << "\n=============== Book a Ticket =============== \n";
     S.inputCustomer();
@@ -333,6 +333,28 @@ void ViewRecord() {
     system("pause");
 }
 
+void SearchRecord() {
+    ifstream fileIn;
+    fileIn.open("Tourist.txt");
+    vector<Customer> List;
+    VectorReadFile(fileIn,List);
+    string ID;
+    cout << "Enter record's ID: ";
+    getline(cin,ID);
+    int i =0;
+    for (i; i<List.size(); i++) {
+        if (List[i].type.compare("Child") == 0 && List[i].children.id.compare(ID) == 0 || List[i].type.compare("Adult") == 0 && List[i].adult.id.compare(ID) == 0) {
+            cout << "\n================ Tourist Record ================ \n";
+            List[i].printAll();
+            cout << endl;
+            break;
+        }
+    }
+    if (i == List.size())
+        cout << "\n(!) TOURIST NOT FOUND (!)\n\n";
+    system("pause");
+}
+
 
 int main() {
     int choice =0;
@@ -351,12 +373,16 @@ int main() {
     cin >> choice; cin.ignore();
     switch(choice) {
         case 1:
-            addRecord();
+            AddRecord();
             break;
         case 2:
             ViewRecord();
             break;
         case 3:
+            SearchRecord();
+            break;
+        case 4:
+
         default:
             break;
     }
