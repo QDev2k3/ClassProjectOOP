@@ -16,7 +16,7 @@ class Tourist {
         int placeType; string place; 
         string transport /*bus, plane, cruiseship, train*/;
         int tier; string ticketTier; /* Regular vs VIP */
-        int days; string duration /*not yet used*/;
+        int days; 
         int price;
     public:
         void setName();
@@ -36,8 +36,8 @@ class Children: public Tourist {
         void setPrice();
         friend class Customer;
         friend void ReadFile(ifstream &fileIn, Customer &C);
-        friend void addRecord();
-
+        friend void AddRecord();
+        friend void SearchRecord();
 };
 
 class Adult: public Tourist {
@@ -45,8 +45,8 @@ class Adult: public Tourist {
         void setPrice();
         friend class Customer;
         friend void ReadFile(ifstream &fileIn, Customer &C);
-        friend void addRecord();
-
+        friend void AddRecord();
+        friend void SearchRecord();
 };
 
 class Customer {
@@ -60,9 +60,12 @@ class Customer {
         void print();
         void printAll();
         friend void ReadFile(ifstream &fileIn, Customer &C);
-        friend void addRecord();
+        friend void AddRecord();
+        friend void SearchRecord();
 };
 
 void ReadFile(ifstream &fileIn, Customer &C);
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
-void addRecord();
+void ViewRecord();
+void AddRecord();
+void SearchRecord();
