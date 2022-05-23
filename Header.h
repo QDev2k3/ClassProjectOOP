@@ -58,6 +58,7 @@ class Customer {
         string getType();
         void inputCustomer();
         void print();
+        void printAll();
         friend void ReadFile(ifstream &fileIn, Customer &C);
         friend void addRecord();
 };
