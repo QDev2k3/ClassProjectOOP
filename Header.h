@@ -36,6 +36,7 @@ class Children: public Tourist {
         void setPrice();
         friend class Customer;
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void addRecord();
 
 };
 
@@ -44,6 +45,7 @@ class Adult: public Tourist {
         void setPrice();
         friend class Customer;
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void addRecord();
 
 };
 
@@ -57,7 +59,9 @@ class Customer {
         void inputCustomer();
         void print();
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void addRecord();
 };
 
 void ReadFile(ifstream &fileIn, Customer &C);
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
+void addRecord();
