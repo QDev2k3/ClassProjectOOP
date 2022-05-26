@@ -343,7 +343,7 @@ void SearchRecord() {
     getline(cin,ID);
     int i =0;
     for (i; i<List.size(); i++) {
-        if (List[i].type.compare("Child") == 0 && List[i].children.id.compare(ID) == 0 || List[i].type.compare("Adult") == 0 && List[i].adult.id.compare(ID) == 0) {
+        if (List[i].children.id.compare(ID) == 0 || List[i].adult.id.compare(ID) == 0) {
             cout << "\n================ Tourist Record ================ \n";
             List[i].printAll();
             cout << endl;
