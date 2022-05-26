@@ -31,7 +31,7 @@ void Tourist::setAge() {
     cin.ignore();
 }
 
-void Tourist::setAddress(){
+void Tourist::setAddress(){ 
     cout << "Address: ";
     getline(cin,address);
 }
