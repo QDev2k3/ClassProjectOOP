@@ -35,18 +35,22 @@ class Children: public Tourist {
     public:
         void setPrice();
         friend class Customer;
+        friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
         friend void AddRecord();
         friend void SearchRecord();
+        friend void DeleteRecord();
 };
 
 class Adult: public Tourist {
     public:
         void setPrice();
         friend class Customer;
+        friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
         friend void AddRecord();
         friend void SearchRecord();
+        friend void DeleteRecord();
 };
 
 class Customer {
@@ -55,17 +59,25 @@ class Customer {
         Children children;
         Adult adult;
     public:
-        string getType();
+        string getName();
+        int getFee();
         void inputCustomer();
         void print();
         void printAll();
+        friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
         friend void AddRecord();
         friend void SearchRecord();
+        friend void DeleteRecord();
 };
 
+void PrintFile(ofstream &fileOut, Customer S);
 void ReadFile(ifstream &fileIn, Customer &C);
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
+void SortRecord();
+void ViewByFee();
+void ViewByName();
 void ViewRecord();
 void AddRecord();
 void SearchRecord();
+void DeleteRecord();
