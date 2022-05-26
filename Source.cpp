@@ -175,6 +175,20 @@ void Adult::setPrice() {   // Tính thêm phí tour dài ngày, nếu ngày > 5 
     price = baseFee + transportFee + tierFee + durationFee;
 }
 
+string Customer::getName() {
+    if (type.compare("Child") == 0)
+        return children.name;
+    else    
+        return adult.name;
+}
+
+int Customer::getFee() {
+    if (type.compare("Child") == 0)
+        return children.price;
+    else    
+        return adult.price;
+}
+
 void Customer::inputCustomer() {
     string name,id;
     int age;
@@ -257,6 +271,22 @@ void Customer::printAll() {
     }
 }
 
+void PrintFile(ofstream &fileOut, Customer S) {
+    fileOut << S.type << ",";
+    if (S.type.compare("Child") == 0) {
+        fileOut << S.children.name << "," << S.children.id << ",";
+        fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
+        fileOut << S.children.ticketTier << ",";
+        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price;
+    }
+    else {
+        fileOut << S.adult.name << "," << S.adult.id << ",";
+        fileOut << S.adult.address << "," << S.adult.place << "," << S.adult.transport << ",";
+        fileOut << S.adult.ticketTier << ",";
+        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price;
+    }
+}
+
 void ReadFile(ifstream &fileIn, Customer &C) {
     getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
@@ -318,12 +348,49 @@ void AddRecord() {
     system("pause");
 }
 
-void ViewRecord() {
+
+void SortRecord() {
+    string name1,name2;
     ifstream fileIn;
     fileIn.open("Tourist.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
-    cout << "\n================ Tourist Record ================ \n";
+    for (int i=0; i<List.size(); i++) {
+        for (int j=i+1; j<List.size(); j++) {
+            name1 = List[i].getName();
+            name2 = List[j].getName();
+            if (name1[0] > name2[0])
+                swap(List[i],List[j]);
+        }
+    }
+    fileIn.close();
+    ofstream fileOut;
+    fileOut.open("Tourist.txt", ios_base::trunc);
+    for (int i=0; i<List.size(); i++) {
+        PrintFile(fileOut,List[i]);
+        if (i != List.size()-1) {
+            fileOut << endl;
+        }
+    }
+    fileOut.close();
+    system("pause");
+}
+
+void ViewByFee() {
+    int fee1,fee2;
+    ifstream fileIn;
+    fileIn.open("Tourist.txt");
+    vector<Customer> List;
+    VectorReadFile(fileIn,List);
+    for (int i=0; i<List.size(); i++) {
+        for (int j=i+1; j<List.size(); j++) {
+            fee1 = List[i].getFee();
+            fee2 = List[j].getFee();
+            if (fee1 < fee2)
+                swap(List[i],List[j]);
+        }
+    }
+    cout << "\n\n================ Tourist Record ================ \n";
     cout << "Name\t\tID\t\tPlace  \tPrice" << endl;
     cout << "------------------------------------------------ \n";
     for (int i=0; i<List.size(); i++) {
@@ -331,6 +398,44 @@ void ViewRecord() {
     }
     fileIn.close();
     system("pause");
+}
+
+void ViewByName() {
+    ifstream fileIn;
+    fileIn.open("Tourist.txt");
+    vector<Customer> List;
+    VectorReadFile(fileIn,List);
+    cout << "\n\n================ Tourist Record ================ \n";
+    cout << "Name\t\tID\t\tPlace  \tPrice" << endl;
+    cout << "------------------------------------------------ \n";
+    for (int i=0; i<List.size(); i++) {
+        List[i].print();
+    }
+    fileIn.close();
+    system("pause");
+}
+
+void ViewRecord() {
+    int choice=0;
+    cout << "\nChoose record viewing mode \n\n";
+    cout << "\t1. View by Name\n";
+    cout << "\t2. View by highest fee\n\n";
+    cout << "Enter Your Choice: ";
+    cin >> choice; 
+    while (choice!=1 && choice !=2) {
+        cout << "(!) INVALID INPUT, PLEASE TRY AGAIN (!)" << endl;
+        cout << "Enter Your Choice: ";
+        cin >> choice; 
+    }
+    cin.ignore();
+    switch(choice) {
+        case 1:
+            ViewByName();
+            break;
+        case 2:
+            ViewByFee();
+            break;
+    }
 }
 
 void SearchRecord() {
@@ -355,6 +460,49 @@ void SearchRecord() {
     system("pause");
 }
 
+void DeleteRecord() {
+    ifstream fileIn;
+    fileIn.open("Tourist.txt");
+    vector<Customer> List;
+    VectorReadFile(fileIn,List);
+    int index = List.size();
+    fileIn.close();
+    if (List.size() < 1) {
+        cout << "\n(!) RECORD LIST IS EMPTY, PLEASE ADD A RECORD FIRST (!)\n";
+        system("pause");
+        return ;
+    }
+    else {
+        string ID;
+        cout << "Enter record's ID: ";
+        getline(cin,ID);
+        int i =0;
+        for (i; i<List.size(); i++) {
+            if (List[i].children.id.compare(ID) == 0 || List[i].adult.id.compare(ID) == 0) {
+                index = i;
+                break;
+            }
+        }
+        if (i == List.size()) {
+            cout << "\n(!) TOURIST NOT FOUND (!)\n\n";
+            system("pause");
+            return ;
+        }
+
+        ofstream fileOut;
+        fileOut.open("Tourist.txt", ios_base::trunc);
+        for (int i=0; i<List.size(); i++) {
+            if (i != index) {
+                PrintFile(fileOut,List[i]);
+            }
+        }
+        fileOut.close();
+        cout << "\n(!) TOURIST DELETED SUCCESSFULLY (!)\n\n"
+        system("pause");
+        return ;
+    }
+}
+
 
 int main() {
     int choice =0;
@@ -365,15 +513,16 @@ int main() {
     cout<<"\n\t\t\t\t      * MAIN MENU *";
     cout<<"\n\t\t\t\t=========================";
     cout<<"\n\n\n\t\t\t1.Book A Ticket";
-    cout<<"\n\t\t\t2.Tourist records";
+    cout<<"\n\t\t\t2.View Tourist Records";
     cout<<"\n\t\t\t3.Search For Record";
-    cout<<"\n\t\t\t4.Edit Record";
+    cout<<"\n\t\t\t4.Delete Record";
     cout<<"\n\t\t\t5.Exit";
     cout<<"\n\n\t\t\tEnter Your Choice: ";
     cin >> choice; cin.ignore();
     switch(choice) {
         case 1:
             AddRecord();
+            SortRecord();
             break;
         case 2:
             ViewRecord();
@@ -382,7 +531,8 @@ int main() {
             SearchRecord();
             break;
         case 4:
-
+            DeleteRecord();
+            break;
         default:
             break;
     }
