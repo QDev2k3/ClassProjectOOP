@@ -228,14 +228,19 @@ void Customer::inputCustomer() {
         adult.setPrice();
     }
 }
-
+// In ra thông tin cơ bản
 void Customer::print() {
+    // Nếu loại child thì in ra thông tin từ thuộc tính children
+    
+    // if (type.compare("Child") == 0) là để xem customer là người lớn hay trẻ em (Adult /  Child)
+    
     if (type.compare("Child") == 0) {
         cout << children.name << "\t"; 
         cout << children.id << "\t"; 
         cout << children.place << "\t";
         cout << children.price << "\n"; 
     }
+    // Ngược lại thì in ra thông tin từ thuộc tính adult
     else {
         cout << adult.name << "\t";
         cout << adult.id << "\t";
@@ -243,7 +248,7 @@ void Customer::print() {
         cout << adult.price << "\n";
     }
 }
-
+// Tương tự nhưng ỉn a full thông tin
 void Customer::printAll() {
     if (type.compare("Child") == 0) {
         cout << "Name: " << children.name << "\n"; 
@@ -271,6 +276,7 @@ void Customer::printAll() {
     }
 }
 
+// In ra file, cơ chế tương tự
 void PrintFile(ofstream &fileOut, Customer S) {
     fileOut << S.type << ",";
     if (S.type.compare("Child") == 0) {
@@ -287,6 +293,7 @@ void PrintFile(ofstream &fileOut, Customer S) {
     }
 }
 
+// Đọc từ file
 void ReadFile(ifstream &fileIn, Customer &C) {
     getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
@@ -315,6 +322,7 @@ void ReadFile(ifstream &fileIn, Customer &C) {
     }
 }
 
+// Đọc và input vào 1 vector
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     Customer S;
     while (fileIn.eof() == false){
@@ -323,10 +331,13 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     }
 }
 
+// Thêm 1 khách hàng vào danh sách
 void AddRecord() {
     Customer S;
     cout << "\n=============== Book a Ticket =============== \n";
-    S.inputCustomer();
+    // Input khách hàng
+    S.inputCustomer(); 
+    // In khách hàng vào file
     ofstream fileOut;
     fileOut.open("Tourist.txt", ios_base::app);
     fileOut << endl;
