@@ -28,12 +28,12 @@ class Tourist {
         void setTier(); 
         void setDuration();
         virtual void setPrice() = 0;  // Hàm thuần ảo
-         
 };
 
 class Children: public Tourist {
     public:
         void setPrice();  // Set phí du lịch cho trẻ em
+    
         friend class Customer;
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
@@ -45,6 +45,7 @@ class Children: public Tourist {
 class Adult: public Tourist {
     public:
         void setPrice(); // Set phí du lịch cho người lớn
+    
         friend class Customer;
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
@@ -61,9 +62,10 @@ class Customer {
     public:
         string getName();
         int getFee();
-        void inputCustomer();
-        void print();
-        void printAll();
+        void inputCustomer(); // Nhập thông tin khách hàng
+        void print();     // In ra thông tin cơ bản
+        void printAll();  // In ra thông tin chi tiết
+    
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
         friend void AddRecord();
