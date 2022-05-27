@@ -56,9 +56,9 @@ class Adult: public Tourist {
 
 class Customer {
     private:
-        string type;
-        Children children;
-        Adult adult;
+        string type; // loại ( người lớn, trẻ em)
+        Children children;  // thuộc tính: trẻ em, nếu tuổi <=18 thì mọi thao tác sẽ được thực hiện trên thuộc tính children
+        Adult adult;  // // thuộc tính: người lớn, nếu tuổi > 18 thì mọi thao tác sẽ được thực hiện trên thuộc tính adult
     public:
         string getName();
         int getFee();
