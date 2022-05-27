@@ -13,11 +13,11 @@ class Tourist {
         string name,id,address;   // Tên,CMND, Địa chỉ
         char gender; // Giới tính
         int age; // Tuổi
-        int placeType; string place; // placeType=1 : Nội địa, placeType=2: Nước ngoài
+        int placeType; string place; // placeType=1 : Nội địa, placeType=2: Nước ngoài ;  place: địa điểm du lịch
         string transport /*bus, plane, cruiseship, train*/;
         int tier; string ticketTier; // loại vé
-        int days; // Số ngày du lịch
-        int price; // Phí du lịch
+        int days; // Số ngày du lịch (>5 = thêm phí)
+        int price; // Phí du lịch (Tính riêng vs trẻ em / người lớn
     public:
         void setName();
         void setID();
@@ -53,7 +53,8 @@ class Adult: public Tourist {
         friend void SearchRecord();
         friend void DeleteRecord();
 };
-
+// Khách hàng nói chung, nếu tuổi <=18 thì nhập thông tin cho children ngược lại thì nhập cho adult
+// Khi thao tác với customer, căn cứ vào "type" để truy xuất vào thông tin của đúng thuộc tính, vì nếu 1 Customer là trẻ em thì thuộc tính "adult" sẽ không có gì cả.
 class Customer {
     private:
         string type; // loại ( người lớn, trẻ em)
