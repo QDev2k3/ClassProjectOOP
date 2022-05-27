@@ -1,16 +1,16 @@
 #include "Header.h"
 
-void Tourist::setName() {
+void Tourist::setName() { // Set tên
     cout << "Name: ";
     getline(cin,name);
 }
 
-void Tourist::setID() {
+void Tourist::setID() { // Set CMND
     cout << "ID: ";
     getline(cin,id);
 }
 
-void Tourist::setGender() {
+void Tourist::setGender() {  // // Set giới tính
     int x = 0;
     cout << "Gender [1.Male  2.Female]: ";
     cin >> x;
@@ -25,17 +25,17 @@ void Tourist::setGender() {
         gender = 'F';
 }
 
-void Tourist::setAge() {
+void Tourist::setAge() { // Set tuổi
     cout << "Age: ";
     cin >> age;
     cin.ignore();
 }
-
+//Set địa chỉ
 void Tourist::setAddress(){ 
     cout << "Address: ";
     getline(cin,address);
 }
-
+// Set địa điểm du lịch (place) + phương thức di chuyển (transport)
 void Tourist::setPlace(){
     int x=0, transportType;
     cout << "Choose travel region [1.Domestic   2.International]: ";
@@ -106,7 +106,7 @@ void Tourist::setPlace(){
             transport = "Plane";
     }
 }
-
+// Chọn loại vé
 void Tourist::setTier() {
     cout << "Choose your Ticket [1.Regular  2.VIP]: ";
     cin >> tier;
@@ -125,7 +125,7 @@ void Tourist::setTier() {
             break;
     }
 }
-
+// Set thời gian du lịch
 void Tourist::setDuration() {
     cout << "Choose your travel duration (days): ";
     cin >> days; cin.ignore();
@@ -202,7 +202,7 @@ void Customer::inputCustomer() {
     cout << "Age: ";
     cin >> age;
     cin.ignore();
-    
+    // Nếu tuổi lớn hơn 18 thì customer được xem là adult và mọi thao tác, thông tin đều thuộc vê thuộc tính "adult"
     if (age < 18){
         type = "Child";
         children.name = name;
