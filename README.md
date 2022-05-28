@@ -10,3 +10,9 @@ Khi đăng ký du lịch cần xác định:
 - Giới tính (nam/nữ) (Không liên quan đến giá vé)
 - Thời gian du lịch (Nếu là người lớn && > 5 ngày thì tính thêm 50k 1 ngày)
 - Loại vé (tier) : Regular || VIP  
+
+Các thao tác yêu cầu:
+- Thêm 1 du khách vào danh sách
+- Xem danh sách thông tin sơ lược khách hàng (Sắp xếp theo tên và theo phí du lịch) 
+- Tìm 1 khách hàng và in thông tin chi tiết
+- Xóa di 1 khách hàng
