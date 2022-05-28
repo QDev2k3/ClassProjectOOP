@@ -359,34 +359,6 @@ void AddRecord() {
     system("pause");
 }
 
-
-void SortRecord() {
-    string name1,name2;
-    ifstream fileIn;
-    fileIn.open("Tourist.txt");
-    vector<Customer> List;
-    VectorReadFile(fileIn,List);
-    for (int i=0; i<List.size(); i++) {
-        for (int j=i+1; j<List.size(); j++) {
-            name1 = List[i].getName();
-            name2 = List[j].getName();
-            if (name1[0] > name2[0])
-                swap(List[i],List[j]);
-        }
-    }
-    fileIn.close();
-    ofstream fileOut;
-    fileOut.open("Tourist.txt", ios_base::trunc);
-    for (int i=0; i<List.size(); i++) {
-        PrintFile(fileOut,List[i]);
-        if (i != List.size()-1) {
-            fileOut << endl;
-        }
-    }
-    fileOut.close();
-    system("pause");
-}
-
 void ViewByFee() {
     int fee1,fee2;
     ifstream fileIn;
@@ -533,7 +505,6 @@ int main() {
     switch(choice) {
         case 1:
             AddRecord();
-            SortRecord();
             break;
         case 2:
             ViewRecord();
