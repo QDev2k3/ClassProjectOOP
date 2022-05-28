@@ -81,6 +81,5 @@ void ViewByFee();  // In ra danh sách theo tên A-Z
 void ViewByName(); // In ra danh sách theo phí du lịch
 void ViewRecord(); // In ra danh sách (byName / byFee)
 void AddRecord(); // Thêm 1 khách hàng mới vào danh sách
-void SortRecord(); // Sắp xếp lại danh sách, gọi sau khi thêm một khách hàng mới vào danh sách
 void SearchRecord();  // Tìm 1 khách hàng và in ra tất cả thông tin cần thiết
 void DeleteRecord(); // Xóa 1 khách hàng
