@@ -340,7 +340,7 @@ void AddRecord() {
     // In khách hàng vào file
     ofstream fileOut;
     fileOut.open("Tourist.txt", ios_base::app);
-    fileOut << endl;
+    fileOut << "\n\n";
     fileOut << S.type << ",";
     if (S.type.compare("Child") == 0) {
         fileOut << S.children.name << "," << S.children.id << ",";
