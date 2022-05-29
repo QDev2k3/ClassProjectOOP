@@ -235,17 +235,11 @@ void Customer::print() {
     // if (type.compare("Child") == 0) là để xem customer là người lớn hay trẻ em (Adult /  Child)
     
     if (type.compare("Child") == 0) {
-        cout << children.name << "\t"; 
-        cout << children.id << "\t"; 
-        cout << children.place << "\t";
-        cout << children.price << "\n"; 
+        cout << setw(20) << children.name << setw(20) << children.id << setw(20) << children.place << setw(20) << children.price << "\n"; 
     }
     // Ngược lại thì in ra thông tin từ thuộc tính adult
     else {
-        cout << adult.name << "\t";
-        cout << adult.id << "\t";
-        cout << adult.place << "\t";
-        cout << adult.price << "\n";
+        cout << setw(20) << adult.name << setw(20) << adult.id << setw(20) << adult.place << setw(20) << adult.price << "\n"; 
     }
 }
 // Tương tự nhưng ỉn a full thông tin
@@ -373,9 +367,9 @@ void ViewByFee() {
                 swap(List[i],List[j]);
         }
     }
-    cout << "\n\n================ Tourist Record ================ \n";
-    cout << "Name\t\tID\t\tPlace  \tPrice" << endl;
-    cout << "------------------------------------------------ \n";
+    cout << "\n\n================================ Tourist Record ================================ \n";
+    cout << setw(20) << "Name" << setw(20) << "ID" << setw(20) << "Place" << setw(20) << "Price" << endl;
+    cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
@@ -388,9 +382,9 @@ void ViewByName() {
     fileIn.open("Tourist.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
-    cout << "\n\n================ Tourist Record ================ \n";
-    cout << "Name\t\tID\t\tPlace  \tPrice" << endl;
-    cout << "------------------------------------------------ \n";
+    cout << "\n\n================================ Tourist Record ================================ \n";
+    cout << setw(20) << "Name" << setw(20) << "ID" << setw(20) << "Place" << setw(20) << "Price" << endl;
+    cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
