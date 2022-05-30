@@ -340,7 +340,7 @@ void AddRecord() {
         fileOut << S.children.name << "," << S.children.id << ",";
         fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
         fileOut << S.children.ticketTier << ",";
-        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price << endl;
+        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price;
     }
     else {
         fileOut << S.adult.name << "," << S.adult.id << ",";
