@@ -474,7 +474,7 @@ void DeleteRecord() {
             }
         }
         fileOut.close();
-        cout << "\n(!) TOURIST DELETED SUCCESSFULLY (!)\n\n"
+        cout << "\n(!) TOURIST DELETED SUCCESSFULLY (!)\n\n";
         system("pause");
         return ;
     }
