@@ -24,10 +24,14 @@ void Tourist::setGender() {  // // Set giới tính
     else if (x == 2)
         gender = 'F';
 }
-
-void Tourist::setAge() { // Set tuổi
+// Set tuổi
+void Tourist::setAge() { 
     cout << "Age: ";
     cin >> age;
+    while (age < 1) {
+        cout << "(!) INVALID INPUT, PLEASE TRY AGAIN (!)" << endl;
+        cin >> age;
+    }
     cin.ignore();
 }
 //Set địa chỉ
@@ -201,6 +205,11 @@ void Customer::inputCustomer() {
 
     cout << "Age: ";
     cin >> age;
+    while (age < 1) {
+        cout << "(!) INVALID INPUT, PLEASE TRY AGAIN (!)" << endl;
+        cout << "Age: ";
+        cin >> age;
+    }
     cin.ignore();
     // Nếu tuổi lớn hơn 18 thì customer được xem là adult và mọi thao tác, thông tin đều thuộc vê thuộc tính "adult"
     if (age < 18){
