@@ -1,0 +1,52 @@
+Hướng dẫn sử dụng:
+
+Các thao tác của phần mềm
+	1. Book a Ticket                (Đặt 1 vé du lịch mới)
+	2. View Tourist Records			(Xem danh sách du khách đã đăng ký)
+	3. Search for Records			(Tìm kiếm 1 du khách và in ra thông tin chi tiết)
+	4. Delete Records				(Xóa vé của 1 du khách)
+	5. Exit
+
+====== 1. Đặt 1 vé du lịch mới ======
+
+	Du khách sẽ nhập vào thông tin chi tiết như sau:
+		1.Name: Tên du khách, là 1 dãy kí tự (VD: Bao Quoc, Dinh Khoi)
+
+		2.ID: CMND, là 1 dãy số (VD: 187966421)
+
+		3.Age: Tuổi, là 1 số nguyên > 1
+
+		4.Gender: Giới tính, nhập 1 là Nam và 2 là Nữ
+
+		5.Address: Địa chỉ, là 1 dãy ký tự (VD: Vinh, Hanoi)
+
+		6.Choose travel region: Chọn khu vực du lịch (Nhập 1 hoặc 2)
+			[1. Nội Địa		2. Nước ngoài]
+
+		7.Choose your destination: Chọn địa điểm du lịch mà bạn muốn tới (Nhập 1-4)
+		Hiện tại chương trình cung cấp cho du khách 8 địa điểm du lịch, 4 trong nước và 4 nước ngoài
+
+		8.Choose your transportation: Chọn phương tiện di chuyển (Nhập 1 hoặc 2)
+
+		9.Choose your travel duration (days): Nhập vào thời hạn chuyến đi là 1 số nguyên (ngày)
+
+		10.Choose your Ticket: Chọn loại vé (Thường / VIP) (Nhập 1 hoặc 2)
+
+
+====== 2. Xem danh sách du khách ======
+
+	Có 2 chế độ xem (Record viewing mode):
+		1. View by name : Xem danh sách được sắp xếp theo bảng chữ cái
+		2. View by fee : Xem danh sách được sắp xếp theo phí du lịch từ cao tới thấp
+
+
+
+====== 3. Tìm kiếm 1 du khách ======
+
+	Nhập vào CMND (ID) của du khách cần tìm và thông tin chi tiết của người đó sẽ được in ra (Nếu tìm thấy)
+
+
+
+====== 4. Xóa vé của 1 du khách ======
+
+	Nhập vào CMND (ID) của du khách cần tìm và toàn bộ thông tin về người đó sẽ bị xóa trên tập dữ liệu (Nếu tìm thấy)
