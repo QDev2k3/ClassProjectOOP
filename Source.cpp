@@ -1,12 +1,11 @@
 #include "Header.h"
 
-// Khởi tạo mã khách hàng ngẫu nhiên 6 chữ số
 void Tourist::setCode() {
     string c;
     srand(time(0));
     for (int i=0; i<6; i++) {
         int k = rand()%9;
-        c = to_string(codeArr[k]);
+        c = to_string(k);
         code.append(c);
     }
 }
@@ -283,7 +282,7 @@ void Customer::printAll() {
 }
 
 void PrintFile(ofstream &fileOut, Customer S) {
-    fileOut << S.type << ",";
+    fileOut << S.type << " ";
     if (S.type.compare("Child") == 0) {
         fileOut << S.children.name << "," << S.children.code << ",";
         fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
@@ -299,7 +298,7 @@ void PrintFile(ofstream &fileOut, Customer S) {
 }
 
 void ReadFile(ifstream &fileIn, Customer &C) {
-    getline(fileIn,C.type,',');
+    //getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
         getline(fileIn,C.children.name,',');
         getline(fileIn,C.children.code,',');
@@ -329,9 +328,10 @@ void ReadFile(ifstream &fileIn, Customer &C) {
 
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     Customer S;
-    while (fileIn.eof() == false){
+    while (fileIn >> S.type){
         ReadFile(fileIn,S);
         list.push_back(S);
+        //fileIn.clear();
     }
 }
 
@@ -422,7 +422,7 @@ void SearchRecord() {
     getline(cin,C);
     int i =0;
     for (i; i<List.size(); i++) {
-        if (List[i].children.code.compare(C) == 0 || List[i].adult.id.compare(C) == 0) {
+        if (List[i].children.code.compare(C) == 0 || List[i].adult.code.compare(C) == 0) {
             cout << "\n================ Tourist Record ================ \n";
             List[i].printAll();
             cout << endl;
@@ -466,8 +466,11 @@ void DeleteRecord() {
         ofstream fileOut;
         fileOut.open("Data.txt", ios_base::trunc);
         for (int i=0; i<List.size(); i++) {
-            if (i != index) {
+            if (i != index ) {
                 PrintFile(fileOut,List[i]);
+                if (i != List.size()-1) {
+                    fileOut << "\n\n";
+                }
             }
         }
         fileOut.close();
@@ -479,36 +482,36 @@ void DeleteRecord() {
 
 
 int main() {
-    int choice =0;
+     int choice =0;
     do {
-    system("cls");
-    cout<<"\n\t\t\t\t=========================";
-    cout<<"\n\t\t\t\t    UIT TRAVEL PROGRAM ";
-    cout<<"\n\t\t\t\t      * MAIN MENU *";
-    cout<<"\n\t\t\t\t=========================";
-    cout<<"\n\n\n\t\t\t1.Book A Ticket";
-    cout<<"\n\t\t\t2.View Tourist Records";
-    cout<<"\n\t\t\t3.Search For Record";
-    cout<<"\n\t\t\t4.Delete Record";
-    cout<<"\n\t\t\t5.Exit";
-    cout<<"\n\n\t\t\tEnter Your Choice: ";
-    cin >> choice; cin.ignore();
-    switch(choice) {
-        case 1:
-            AddRecord();
-            break;
-        case 2:
-            ViewRecord();
-            break;
-        case 3:
-            SearchRecord();
-            break;
-        case 4:
-            DeleteRecord();
-            break;
-        default:
-            break;
-    }
+        system("cls");
+        cout<<"\n\t\t\t\t=========================";
+        cout<<"\n\t\t\t\t    UIT TRAVEL PROGRAM ";
+        cout<<"\n\t\t\t\t      * MAIN MENU *";
+        cout<<"\n\t\t\t\t=========================";
+        cout<<"\n\n\n\t\t\t1.Book A Ticket";
+        cout<<"\n\t\t\t2.View Tourist Records";
+        cout<<"\n\t\t\t3.Search For Record";
+        cout<<"\n\t\t\t4.Delete Record";
+        cout<<"\n\t\t\t5.Exit";
+        cout<<"\n\n\t\t\tEnter Your Choice: ";
+        cin >> choice; cin.ignore();
+        switch(choice) {
+            case 1:
+                AddRecord();
+                break;
+            case 2:
+                ViewRecord();
+                break;
+            case 3:
+                SearchRecord();
+                break;
+            case 4:
+                DeleteRecord();
+                break;
+            default:
+                break;
+        }
     } while (choice != 5);
     return 0;
 }
