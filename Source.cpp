@@ -1,5 +1,6 @@
 #include "Header.h"
 
+// Khởi tạo mã khách hàng ngẫu nhiên 6 chữ số
 void Tourist::setCode() {
     string c;
     srand(time(0));
@@ -10,17 +11,17 @@ void Tourist::setCode() {
     }
 }
 
-void Tourist::setName() { // Set tên
+void Tourist::setName() {
     cout << "Name: ";
     getline(cin,name);
 }
 
-void Adult::setID() { // Set CMND
+void Adult::setID() {
     cout << "ID: ";
     getline(cin,id);
 }
 
-void Tourist::setGender() {  // // Set giới tính
+void Tourist::setGender() {
     int x = 0;
     cout << "Gender [1.Male  2.Female]: ";
     cin >> x;
@@ -34,22 +35,22 @@ void Tourist::setGender() {  // // Set giới tính
     else if (x == 2)
         gender = 'F';
 }
-// Set tuổi
-void Tourist::setAge() { 
+
+void Tourist::setAge() {
     cout << "Age: ";
     cin >> age;
-    while (age < 1) {
+    while (age <= 0) {
         cout << "(!) INVALID INPUT, PLEASE TRY AGAIN (!)" << endl;
         cin >> age;
     }
     cin.ignore();
 }
-//Set địa chỉ
-void Tourist::setAddress(){ 
+
+void Tourist::setAddress(){
     cout << "Address: ";
     getline(cin,address);
 }
-// Set địa điểm du lịch (place) + phương thức di chuyển (transport)
+
 void Tourist::setPlace(){
     int x=0, transportType;
     cout << "Choose travel region [1.Domestic   2.International]: ";
@@ -120,7 +121,7 @@ void Tourist::setPlace(){
             transport = "Plane";
     }
 }
-// Chọn loại vé
+
 void Tourist::setTier() {
     cout << "Choose your Ticket [1.Regular  2.VIP]: ";
     cin >> tier;
@@ -139,7 +140,7 @@ void Tourist::setTier() {
             break;
     }
 }
-// Set thời gian du lịch
+
 void Tourist::setDuration() {
     cout << "Choose your travel duration (days): ";
     cin >> days; cin.ignore();
@@ -210,9 +211,6 @@ void Customer::inputCustomer() {
     cout << "Name: ";
     getline(cin,name);
 
-    cout << "ID: ";
-    getline(cin,id);
-
     cout << "Age: ";
     cin >> age;
     while (age < 1) {
@@ -221,12 +219,12 @@ void Customer::inputCustomer() {
         cin >> age;
     }
     cin.ignore();
-    // Nếu tuổi lớn hơn 18 thì customer được xem là adult và mọi thao tác, thông tin đều thuộc vê thuộc tính "adult"
+    
     if (age < 18){
         type = "Child";
         children.name = name;
-        children.id = id;
         children.age = age;
+        children.setCode();
         children.setGender();
         children.setAddress();
         children.setPlace();
@@ -237,8 +235,9 @@ void Customer::inputCustomer() {
     else {
         type = "Adult";
         adult.name = name;
-        adult.id = id;
         adult.age = age;
+        adult.setCode();
+        adult.setID();
         adult.setGender();
         adult.setAddress();
         adult.setPlace();
@@ -247,25 +246,19 @@ void Customer::inputCustomer() {
         adult.setPrice();
     }
 }
-// In ra thông tin cơ bản
+
 void Customer::print() {
-    // Nếu loại child thì in ra thông tin từ thuộc tính children
-    
-    // if (type.compare("Child") == 0) là để xem customer là người lớn hay trẻ em (Adult /  Child)
-    
     if (type.compare("Child") == 0) {
-        cout << setw(20) << children.name << setw(20) << children.id << setw(20) << children.place << setw(20) << children.price << "\n"; 
+        cout << setw(20) << children.name << setw(20) << children.code << setw(20) << children.place << setw(20) << children.price << "\n"; 
     }
-    // Ngược lại thì in ra thông tin từ thuộc tính adult
     else {
-        cout << setw(20) << adult.name << setw(20) << adult.id << setw(20) << adult.place << setw(20) << adult.price << "\n"; 
+        cout << setw(20) << adult.name << setw(20) << adult.code << setw(20) << adult.place << setw(20) << adult.price << "\n"; 
     }
 }
-// Tương tự nhưng ỉn a full thông tin
+
 void Customer::printAll() {
     if (type.compare("Child") == 0) {
         cout << "Name: " << children.name << "\n"; 
-        cout << "ID: " << children.id << "\n"; 
         cout << "Gender: " << children.gender << "\n";
         cout << "Age: " << children.age << "\n";
         cout << "Address: " << children.address << "\n";
@@ -289,29 +282,27 @@ void Customer::printAll() {
     }
 }
 
-// In ra file, cơ chế tương tự
 void PrintFile(ofstream &fileOut, Customer S) {
     fileOut << S.type << ",";
     if (S.type.compare("Child") == 0) {
-        fileOut << S.children.name << "," << S.children.id << ",";
+        fileOut << S.children.name << "," << S.children.code << ",";
         fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
         fileOut << S.children.ticketTier << ",";
         fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price;
     }
     else {
-        fileOut << S.adult.name << "," << S.adult.id << ",";
+        fileOut << S.adult.name << "," << S.adult.code << "," << S.adult.id << ",";
         fileOut << S.adult.address << "," << S.adult.place << "," << S.adult.transport << ",";
         fileOut << S.adult.ticketTier << ",";
-        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price;
+        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price ;
     }
 }
 
-// Đọc từ file
 void ReadFile(ifstream &fileIn, Customer &C) {
     getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
         getline(fileIn,C.children.name,',');
-        getline(fileIn,C.children.id,',');
+        getline(fileIn,C.children.code,',');
         getline(fileIn,C.children.address,',');
         getline(fileIn,C.children.place,',');
         getline(fileIn,C.children.transport,',');
@@ -323,6 +314,7 @@ void ReadFile(ifstream &fileIn, Customer &C) {
     }
     else {
         getline(fileIn,C.adult.name,',');
+        getline(fileIn,C.adult.code,',');
         getline(fileIn,C.adult.id,',');
         getline(fileIn,C.adult.address,',');
         getline(fileIn,C.adult.place,',');
@@ -335,7 +327,6 @@ void ReadFile(ifstream &fileIn, Customer &C) {
     }
 }
 
-// Đọc và input vào 1 vector
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     Customer S;
     while (fileIn.eof() == false){
@@ -344,29 +335,14 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     }
 }
 
-// Thêm 1 khách hàng vào danh sách
 void AddRecord() {
     Customer S;
     cout << "\n=============== Book a Ticket =============== \n";
-    // Input khách hàng
-    S.inputCustomer(); 
-    // In khách hàng vào file
+    S.inputCustomer();
     ofstream fileOut;
-    fileOut.open("Tourist.txt", ios_base::app);
+    fileOut.open("Data.txt", ios_base::app);
     fileOut << "\n\n";
-    fileOut << S.type << ",";
-    if (S.type.compare("Child") == 0) {
-        fileOut << S.children.name << "," << S.children.id << ",";
-        fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
-        fileOut << S.children.ticketTier << ",";
-        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price;
-    }
-    else {
-        fileOut << S.adult.name << "," << S.adult.id << ",";
-        fileOut << S.adult.address << "," << S.adult.place << "," << S.adult.transport << ",";
-        fileOut << S.adult.ticketTier << ",";
-        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price;
-    }
+    PrintFile(fileOut,S);
     fileOut.close();
     cout << "\n========= Record created successfully! ========= \n";
     system("pause");
@@ -375,7 +351,7 @@ void AddRecord() {
 void ViewByFee() {
     int fee1,fee2;
     ifstream fileIn;
-    fileIn.open("Tourist.txt");
+    fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
     for (int i=0; i<List.size(); i++) {
@@ -387,27 +363,29 @@ void ViewByFee() {
         }
     }
     cout << "\n\n================================ Tourist Record ================================ \n";
-    cout << setw(20) << "Name" << setw(20) << "ID" << setw(20) << "Place" << setw(20) << "Price" << endl;
+    cout << setw(20) << "Name" << setw(20) << "Code" << setw(20) << "Place" << setw(20) << "Price" << endl;
     cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
     fileIn.close();
+    cout << endl;
     system("pause");
 }
 
 void ViewByName() {
     ifstream fileIn;
-    fileIn.open("Tourist.txt");
+    fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
     cout << "\n\n================================ Tourist Record ================================ \n";
-    cout << setw(20) << "Name" << setw(20) << "ID" << setw(20) << "Place" << setw(20) << "Price" << endl;
+    cout << setw(20) << "Name" << setw(20) << "Code" << setw(20) << "Place" << setw(20) << "Price" << endl;
     cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
     fileIn.close();
+    cout << endl;
     system("pause");
 }
 
@@ -436,15 +414,15 @@ void ViewRecord() {
 
 void SearchRecord() {
     ifstream fileIn;
-    fileIn.open("Tourist.txt");
+    fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
-    string ID;
-    cout << "Enter record's ID: ";
-    getline(cin,ID);
+    string C;
+    cout << "Enter record's Code: ";
+    getline(cin,C);
     int i =0;
     for (i; i<List.size(); i++) {
-        if (List[i].children.id.compare(ID) == 0 || List[i].adult.id.compare(ID) == 0) {
+        if (List[i].children.code.compare(C) == 0 || List[i].adult.id.compare(C) == 0) {
             cout << "\n================ Tourist Record ================ \n";
             List[i].printAll();
             cout << endl;
@@ -458,7 +436,7 @@ void SearchRecord() {
 
 void DeleteRecord() {
     ifstream fileIn;
-    fileIn.open("Tourist.txt");
+    fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
     int index = List.size();
@@ -469,12 +447,12 @@ void DeleteRecord() {
         return ;
     }
     else {
-        string ID;
-        cout << "Enter record's ID: ";
-        getline(cin,ID);
+        string C;
+        cout << "Enter record's code: ";
+        getline(cin,C);
         int i =0;
         for (i; i<List.size(); i++) {
-            if (List[i].children.id.compare(ID) == 0 || List[i].adult.id.compare(ID) == 0) {
+            if (List[i].children.code.compare(C) == 0 || List[i].adult.code.compare(C) == 0) {
                 index = i;
                 break;
             }
@@ -486,7 +464,7 @@ void DeleteRecord() {
         }
 
         ofstream fileOut;
-        fileOut.open("Tourist.txt", ios_base::trunc);
+        fileOut.open("Data.txt", ios_base::trunc);
         for (int i=0; i<List.size(); i++) {
             if (i != index) {
                 PrintFile(fileOut,List[i]);
