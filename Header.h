@@ -4,6 +4,8 @@
 #include <vector>
 #include <fstream>
 #include <iomanip>
+#include <cstdlib>
+#include <time.h>
 
 using namespace std;
 
