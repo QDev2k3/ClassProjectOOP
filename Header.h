@@ -9,8 +9,6 @@
 
 using namespace std;
 
-const int codeArr[10] = {0,1,2,3,4,5,6,7,8,9}; // Dung khoi tao ma khach hang
-
 class Customer;
 
 class Tourist {
@@ -42,6 +40,7 @@ class Children: public Tourist {
         friend class Customer;
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
         friend void AddRecord();
         friend void SearchRecord();
         friend void DeleteRecord();
@@ -56,6 +55,7 @@ class Adult: public Tourist {
         friend class Customer;
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
         friend void AddRecord();
         friend void SearchRecord();
         friend void DeleteRecord();
@@ -76,6 +76,7 @@ class Customer {
     
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
+        friend void VectorReadFile(ifstream &fileIn, vector<Customer> &list);
         friend void AddRecord();
         friend void SearchRecord();
         friend void DeleteRecord();
