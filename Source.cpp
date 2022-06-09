@@ -298,7 +298,6 @@ void PrintFile(ofstream &fileOut, Customer S) {
 }
 
 void ReadFile(ifstream &fileIn, Customer &C) {
-    //getline(fileIn,C.type,',');
     if (C.type.compare("Child") == 0) {
         getline(fileIn,C.children.name,',');
         getline(fileIn,C.children.code,',');
@@ -331,7 +330,6 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     while (fileIn >> S.type){
         ReadFile(fileIn,S);
         list.push_back(S);
-        //fileIn.clear();
     }
 }
 
