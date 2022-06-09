@@ -13,7 +13,7 @@ class Customer;
 
 class Tourist {
     protected:
-        string name,code,address;   // Tên,CMND, Địa chỉ
+        string name,code,address;   // Tên,MS, Địa chỉ
         char gender; // Giới tính
         int age; // Tuổi
         int placeType; string place; // placeType=1 : Nội địa, placeType=2: Nước ngoài ;  place: địa điểm du lịch
@@ -36,7 +36,6 @@ class Tourist {
 class Children: public Tourist {
     public:
         void setPrice();  // Set phí du lịch cho trẻ em
-    
         friend class Customer;
         friend void PrintFile(ofstream &fileOut, Customer S);
         friend void ReadFile(ifstream &fileIn, Customer &C);
