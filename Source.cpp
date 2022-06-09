@@ -1,11 +1,21 @@
 #include "Header.h"
 
+void Tourist::setCode() {
+    string c;
+    srand(time(0));
+    for (int i=0; i<6; i++) {
+        int k = rand()%9;
+        c = to_string(codeArr[k]);
+        code.append(c);
+    }
+}
+
 void Tourist::setName() { // Set tên
     cout << "Name: ";
     getline(cin,name);
 }
 
-void Tourist::setID() { // Set CMND
+void Adult::setID() { // Set CMND
     cout << "ID: ";
     getline(cin,id);
 }
