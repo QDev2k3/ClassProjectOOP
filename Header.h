@@ -22,6 +22,7 @@ class Tourist {
         int days; // Số ngày du lịch (>5 = thêm phí)
         int price; // Phí du lịch (Tính riêng vs trẻ em / người lớn
     public:
+        void setCode();
         void setName();
         void setID();
         void setGender();
