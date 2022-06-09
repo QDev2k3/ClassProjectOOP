@@ -1,0 +1,13 @@
+Adult Bao Quoc,460487,187966421,Vinh,Sa Pa,Bus,Regular,20 M 5 1025000
+
+Adult Chuc Thien,377061,187622343,Phu Yen,Japan,Plane,Regular,19 M 7 7200000
+
+Adult Quoc Hung,287381,122688532,Vung Tau,Ha Long,Train,VIP,21 M 3 3530000
+
+Child Huy Pham,873356,Vinh,Nha Trang,Bus,Regular,13 M 5 1025000
+
+Adult Duy Khanh,105354,123345123,Vinh,Sa Pa,Bus,Regular,40 M 2 1025000
+
+Adult Pham Hieu,216660,167866233,Vinh,America,Plane,Regular,19 M 7 7200000
+
+Child Nhat Nam,365481,Can Tho,Korea,Plane,Regular,15 M 14 7000000
