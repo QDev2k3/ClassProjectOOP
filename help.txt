@@ -12,25 +12,27 @@ Các thao tác của phần mềm
 	Du khách sẽ nhập vào thông tin chi tiết như sau:
 		1.Name: Tên du khách, là 1 dãy kí tự (VD: Bao Quoc, Dinh Khoi)
 
-		2.ID: CMND, là 1 dãy số (VD: 187966421)
+		2.Code: Mã khách hàng, mã này được tạo tự động bởi phần mềm khi đặt vé
 
 		3.Age: Tuổi, là 1 số nguyên > 1
+		
+		4.ID: là CMND, nếu khách hàng >18 tuổi (người lớn) thì sẽ phải nhập thêm thông tin này
 
-		4.Gender: Giới tính, nhập 1 là Nam và 2 là Nữ
+		5.Gender: Giới tính, nhập 1 là Nam và 2 là Nữ
 
-		5.Address: Địa chỉ, là 1 dãy ký tự (VD: Vinh, Hanoi)
+		6.Address: Địa chỉ, là 1 dãy ký tự (VD: Vinh, Hanoi)
 
-		6.Choose travel region: Chọn khu vực du lịch (Nhập 1 hoặc 2)
+		7.Choose travel region: Chọn khu vực du lịch (Nhập 1 hoặc 2)
 			[1. Nội Địa		2. Nước ngoài]
 
-		7.Choose your destination: Chọn địa điểm du lịch mà bạn muốn tới (Nhập 1-4)
+		8.Choose your destination: Chọn địa điểm du lịch mà bạn muốn tới (Nhập 1-4)
 		Hiện tại chương trình cung cấp cho du khách 8 địa điểm du lịch, 4 trong nước và 4 nước ngoài
 
-		8.Choose your transportation: Chọn phương tiện di chuyển (Nhập 1 hoặc 2)
+		9.Choose your transportation: Chọn phương tiện di chuyển (Nhập 1 hoặc 2)
 
-		9.Choose your travel duration (days): Nhập vào thời hạn chuyến đi là 1 số nguyên (ngày)
+		10.Enter your travel duration (days): Nhập vào thời hạn chuyến đi là 1 số nguyên (ngày)
 
-		10.Choose your Ticket: Chọn loại vé (Thường / VIP) (Nhập 1 hoặc 2)
+		11.Choose your Ticket: Chọn loại vé (Thường / VIP) (Nhập 1 hoặc 2)
 
 
 ====== 2. Xem danh sách du khách ======
