@@ -24,12 +24,11 @@ class Tourist {
     public:
         void setCode();
         void setName();
-        void setID();
         void setGender();
         void setAge();
         void setAddress();
         void setPlace();
-        void setTier(); 
+        void setTier();
         void setDuration();
         virtual void setPrice() = 0;  // Hàm thuần ảo
 };
