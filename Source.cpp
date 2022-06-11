@@ -372,17 +372,26 @@ void ViewByFee() {
 }
 
 void ViewByName() {
+    string name1,name2;
     ifstream fileIn;
     fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
+    for (int i=0; i<List.size(); i++) {
+        for (int j=i+1; j<List.size(); j++) {
+            name1 = List[i].getName();
+            name2 = List[j].getName();
+            if (name1[1] < name2[1])
+                swap(List[i],List[j]);
+        }
+    }
+    fileIn.close();
     cout << "\n\n================================ Tourist Record ================================ \n";
     cout << setw(20) << "Name" << setw(20) << "Code" << setw(20) << "Place" << setw(20) << "Price" << endl;
     cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
-    fileIn.close();
     cout << endl;
     system("pause");
 }
