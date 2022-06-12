@@ -141,7 +141,7 @@ void Tourist::setTier() {
 }
 
 void Tourist::setDuration() {
-    cout << "Choose your travel duration (days): ";
+    cout << "Enter your travel duration (days): ";
     cin >> days; cin.ignore();
 }
 
