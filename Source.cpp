@@ -1,5 +1,6 @@
 #include "Header.h"
 
+// Khởi tạo mã khách hàng ngẫu nhiên
 void Tourist::setCode() {
     string c;
     srand(time(0));
@@ -10,16 +11,13 @@ void Tourist::setCode() {
     }
 }
 
+// Input tên khách hàng
 void Tourist::setName() {
     cout << "Name: ";
     getline(cin,name);
 }
 
-void Adult::setID() {
-    cout << "ID: ";
-    getline(cin,id);
-}
-
+// Input giới tính khách hàng
 void Tourist::setGender() {
     int x = 0;
     cout << "Gender [1.Male  2.Female]: ";
@@ -35,6 +33,7 @@ void Tourist::setGender() {
         gender = 'F';
 }
 
+// Input tuổi khách hàng
 void Tourist::setAge() {
     cout << "Age: ";
     cin >> age;
@@ -45,11 +44,13 @@ void Tourist::setAge() {
     cin.ignore();
 }
 
+// Input địa chỉ khách hàng
 void Tourist::setAddress(){
     cout << "Address: ";
     getline(cin,address);
 }
 
+// Input địa điểm du lịch
 void Tourist::setPlace(){
     int x=0, transportType;
     cout << "Choose travel region [1.Domestic   2.International]: ";
@@ -88,7 +89,6 @@ void Tourist::setPlace(){
             transport = "Train";
     }
     else {
-
         cout << "  1. Japan" << endl;
         cout << "  2. Singapore" << endl;
         cout << "  3. America" << endl;
@@ -121,6 +121,7 @@ void Tourist::setPlace(){
     }
 }
 
+// Input loại vé
 void Tourist::setTier() {
     cout << "Choose your Ticket [1.Regular  2.VIP]: ";
     cin >> tier;
@@ -140,12 +141,14 @@ void Tourist::setTier() {
     }
 }
 
+// Input thời gian du lịch
 void Tourist::setDuration() {
     cout << "Enter your travel duration (days): ";
     cin >> days; cin.ignore();
 }
 
-void Children::setPrice() {  // 50% vé + không tính thêm phí cho tour dài ngày
+// Set giá vé cho trẻ em
+void Children::setPrice() { 
     int baseFee=0, transportFee=0, tierFee=0;
     if (placeType == 1) { 
         baseFee = 1000000;
@@ -166,7 +169,14 @@ void Children::setPrice() {  // 50% vé + không tính thêm phí cho tour dài 
     price = (baseFee + transportFee + tierFee);
 }
 
-void Adult::setPrice() {   // Tính thêm phí tour dài ngày, nếu ngày > 5 thì mỗi ngày tính thêm 50k
+// Set Max định danh công dân cho người lớn
+void Adult::setID() {
+    cout << "ID: ";
+    getline(cin,id);
+}
+
+// Set giá vé cho người lớn
+void Adult::setPrice() {  
     int baseFee=0, transportFee=0, tierFee=0, durationFee=0;
     if (placeType == 1) { 
         baseFee = 1000000;
@@ -189,6 +199,7 @@ void Adult::setPrice() {   // Tính thêm phí tour dài ngày, nếu ngày > 5 
     price = baseFee + transportFee + tierFee + durationFee;
 }
 
+// Trả về tên khách hàng
 string Customer::getName() {
     if (type.compare("Child") == 0)
         return children.name;
@@ -196,6 +207,7 @@ string Customer::getName() {
         return adult.name;
 }
 
+// Trả về giá vé của khách hàng
 int Customer::getFee() {
     if (type.compare("Child") == 0)
         return children.price;
@@ -203,6 +215,7 @@ int Customer::getFee() {
         return adult.price;
 }
 
+// Nhập thông tin khách hàng
 void Customer::inputCustomer() {
     string name,id;
     int age;
@@ -246,15 +259,25 @@ void Customer::inputCustomer() {
     }
 }
 
+// In thông tin sơ lược
 void Customer::print() {
     if (type.compare("Child") == 0) {
-        cout << setw(20) << children.name << setw(20) << children.code << setw(20) << children.place << setw(20) << children.price << "\n"; 
+        cout << setw(20) << 
+        children.name << setw(20) << 
+        children.code << setw(20) << 
+        children.place << setw(20) << 
+        children.price << "\n"; 
     }
     else {
-        cout << setw(20) << adult.name << setw(20) << adult.code << setw(20) << adult.place << setw(20) << adult.price << "\n"; 
+        cout << setw(20) << 
+        adult.name << setw(20) << 
+        adult.code << setw(20) << 
+        adult.place << setw(20) << 
+        adult.price << "\n"; 
     }
 }
 
+// In thông tin chi tiết
 void Customer::printAll() {
     if (type.compare("Child") == 0) {
         cout << "Name: " << children.name << "\n"; 
@@ -281,19 +304,33 @@ void Customer::printAll() {
     }
 }
 
+// Xuất thông tin khách hàng vào file Data
 void PrintFile(ofstream &fileOut, Customer S) {
     fileOut << S.type << " ";
     if (S.type.compare("Child") == 0) {
-        fileOut << S.children.name << "," << S.children.code << ",";
-        fileOut << S.children.address << "," << S.children.place << "," << S.children.transport << ",";
-        fileOut << S.children.ticketTier << ",";
-        fileOut << S.children.age << " " << S.children.gender << " " << S.children.days << " " << S.children.price;
+        fileOut << S.children.name << "," << 
+        S.children.code << "," << 
+        S.children.address << "," << 
+        S.children.place << "," << 
+        S.children.transport << "," << 
+        S.children.ticketTier << ",";
+        fileOut << S.children.age << " " << 
+        S.children.gender << " " << 
+        S.children.days << " " << 
+        S.children.price;
     }
     else {
-        fileOut << S.adult.name << "," << S.adult.code << "," << S.adult.id << ",";
-        fileOut << S.adult.address << "," << S.adult.place << "," << S.adult.transport << ",";
-        fileOut << S.adult.ticketTier << ",";
-        fileOut << S.adult.age << " " << S.adult.gender << " " << S.adult.days << " " << S.adult.price ;
+        fileOut << S.adult.name << "," << 
+        S.adult.code << "," << 
+        S.adult.id << "," << 
+        S.adult.address << "," << 
+        S.adult.place << "," << 
+        S.adult.transport << "," << 
+        S.adult.ticketTier << ",";
+        fileOut << S.adult.age << " " << 
+        S.adult.gender << " " << 
+        S.adult.days << " " << 
+        S.adult.price ;
     }
 }
 
@@ -325,6 +362,7 @@ void ReadFile(ifstream &fileIn, Customer &C) {
     }
 }
 
+// Hàm đọc file dữ liệu và lưu vào mảng vector
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     Customer S;
     while (fileIn >> S.type){
@@ -333,6 +371,7 @@ void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     }
 }
 
+// Nhập thông tin khách hàng, sau đó xuất vào file Data
 void AddRecord() {
     Customer S;
     cout << "\n=============== Book a Ticket =============== \n";
@@ -346,12 +385,15 @@ void AddRecord() {
     system("pause");
 }
 
+// Xem danh sách sắp xếp theo giá vé từ cao xuông thấp
 void ViewByFee() {
     int fee1,fee2;
+    // đọc dữ liệu từ file vào mảng
     ifstream fileIn;
     fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
+    // sắp xếp theo giá vé
     for (int i=0; i<List.size(); i++) {
         for (int j=i+1; j<List.size(); j++) {
             fee1 = List[i].getFee();
@@ -360,6 +402,7 @@ void ViewByFee() {
                 swap(List[i],List[j]);
         }
     }
+    // in ra danh sách
     cout << "\n\n================================ Tourist Record ================================ \n";
     cout << setw(20) << "Name" << setw(20) << "Code" << setw(20) << "Place" << setw(20) << "Price" << endl;
     cout << "-------------------------------------------------------------------------------- \n";
@@ -371,31 +414,46 @@ void ViewByFee() {
     system("pause");
 }
 
+// Hàm trả về chữ cái đầu trong tên khách hàng
+char getFirstLetter(string name) {
+    for (int i=0; i<name.length(); i++) {
+        if (name[i] == ' ')
+            return name[i+1];
+    }
+}
+// Xem danh sách dưới dạng sắp xếp theo chữ cái đầu
 void ViewByName() {
     string name1,name2;
+    char c1, c2;
+    // đọc dữ liệu từ file vào mảng
     ifstream fileIn;
     fileIn.open("Data.txt");
     vector<Customer> List;
     VectorReadFile(fileIn,List);
+    // sắp xếp theo tên
     for (int i=0; i<List.size(); i++) {
         for (int j=i+1; j<List.size(); j++) {
-            name1 = List[i].getName();
-            name2 = List[j].getName();
-            if (name1[1] < name2[1])
+            name1 = List[i].getName(); name2 = List[j].getName();
+            c1 = getFirstLetter(name1); c2 = getFirstLetter(name2);
+            if (c1 < c2){
                 swap(List[i],List[j]);
+            }
         }
     }
     fileIn.close();
+    // in ra danh sách
     cout << "\n\n================================ Tourist Record ================================ \n";
     cout << setw(20) << "Name" << setw(20) << "Code" << setw(20) << "Place" << setw(20) << "Price" << endl;
     cout << "-------------------------------------------------------------------------------- \n";
     for (int i=0; i<List.size(); i++) {
         List[i].print();
     }
+    
     cout << endl;
     system("pause");
 }
 
+// Xem danh sách (chung)
 void ViewRecord() {
     int choice=0;
     cout << "\nChoose record viewing mode \n\n";
@@ -419,6 +477,7 @@ void ViewRecord() {
     }
 }
 
+// Tìm kiếm 1 khách hàng theo mã khách hàng và xuất ra thông tin chi tiết
 void SearchRecord() {
     ifstream fileIn;
     fileIn.open("Data.txt");
@@ -441,6 +500,7 @@ void SearchRecord() {
     system("pause");
 }
 
+// Xóa 1 khách hàng khỏi danh sách
 void DeleteRecord() {
     ifstream fileIn;
     fileIn.open("Data.txt");
@@ -489,7 +549,7 @@ void DeleteRecord() {
 
 
 int main() {
-     int choice =0;
+    int choice =0;
     do {
         system("cls");
         cout<<"\n\t\t\t\t=========================";
