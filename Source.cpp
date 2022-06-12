@@ -334,6 +334,7 @@ void PrintFile(ofstream &fileOut, Customer S) {
     }
 }
 
+// Hàm đọc dữ liệu từ file cho 1 khách hàng
 void ReadFile(ifstream &fileIn, Customer &C) {
     if (C.type.compare("Child") == 0) {
         getline(fileIn,C.children.name,',');
@@ -362,7 +363,7 @@ void ReadFile(ifstream &fileIn, Customer &C) {
     }
 }
 
-// Hàm đọc file dữ liệu và lưu vào mảng vector
+// Hàm đọc dữ liệu từ file cho 1 mảng nhiều khách hàng
 void VectorReadFile(ifstream &fileIn, vector<Customer> &list) {
     Customer S;
     while (fileIn >> S.type){
@@ -415,16 +416,16 @@ void ViewByFee() {
 }
 
 // Hàm trả về chữ cái đầu trong tên khách hàng
-char getFirstLetter(string name) {
-    for (int i=0; i<name.length(); i++) {
-        if (name[i] == ' ')
+int getFirstLetter(string name) {
+    for (int i=2; i<name.length()-1; i++) {
+        if (name[i] == 32) 
             return name[i+1];
     }
 }
 // Xem danh sách dưới dạng sắp xếp theo chữ cái đầu
 void ViewByName() {
     string name1,name2;
-    char c1, c2;
+    int c1, c2;
     // đọc dữ liệu từ file vào mảng
     ifstream fileIn;
     fileIn.open("Data.txt");
@@ -435,7 +436,7 @@ void ViewByName() {
         for (int j=i+1; j<List.size(); j++) {
             name1 = List[i].getName(); name2 = List[j].getName();
             c1 = getFirstLetter(name1); c2 = getFirstLetter(name2);
-            if (c1 < c2){
+            if (c1 > c2){
                 swap(List[i],List[j]);
             }
         }
